@@ -17,6 +17,7 @@ class IpController extends AdminController
         if (isset($request->getQueryParams()["page"])) {
             $pageNum = $request->getQueryParams()["page"];
         }
+        
         $logs = Ip::orderBy('id', 'desc')->where("datetime",">",time()-60)->paginate(15, ['*'], 'page', $pageNum);
 		$loc=array();
 		

@@ -21,7 +21,9 @@ class UserController extends AdminController
 		
 
 		//Ip::where("datetime","<",time()-90)->get()->delete();
-		$total = Ip::where("datetime",">=",time()-90)->orderBy('userid', 'desc')->get();
+		// 管理员查看用户列表 修改在线IP为显示最近一天
+		// 默认是显示1.5分钟  90
+		$total = Ip::where("datetime",">=",time()-86400)->orderBy('userid', 'desc')->get();
 		
 		
 		$userip=array();
@@ -70,7 +72,8 @@ class UserController extends AdminController
 		
 
 		//Ip::where("datetime","<",time()-90)->get()->delete();
-		$total = Ip::where("datetime",">=",time()-90)->orderBy('userid', 'desc')->get();
+		// 同上
+		$total = Ip::where("datetime",">=",time()-86400)->orderBy('userid', 'desc')->get();
 		
 		
 		$userip=array();
