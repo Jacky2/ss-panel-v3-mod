@@ -409,7 +409,7 @@ class Job
 		// 最近五分钟使用IP 300
 		// 最近一天使用IP   86400
 		// 保存在数据库中的
-		Ip::where("datetime","<",time()-300)->delete();
+		Ip::where("datetime","<",time()-86400)->delete();
 
 
 		$adminUser = User::where("is_admin","=","1")->get();

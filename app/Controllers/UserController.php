@@ -1150,7 +1150,7 @@ class UserController extends BaseController
 		
 		// 最近一天使用IP   86400
 		// 用户显示面板 默认是显示5分钟使用IP 300
-		$total = Ip::where("datetime",">=",time()-300)->where('userid', '=',$this->user->id)->get();
+		$total = Ip::where("datetime",">=",time()-86400)->where('userid', '=',$this->user->id)->get();
 		
 		$iplocation = new QQWry(); 
 		foreach($total as $single)
