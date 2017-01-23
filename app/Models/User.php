@@ -36,7 +36,7 @@ class User extends Model
     public function getGravatarAttribute()
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
-        return "https://avatar.zhaojin97.cn/avatar/".$hash;
+        return "https://secure.gravatar.com/avatar/".$hash;
     }
 
     public function isAdmin()
@@ -202,6 +202,12 @@ class User extends Model
     {
         $uid = $this->attributes['id'];
         return InviteCode::where('user_id', $uid)->get();
+    }
+    
+    public function ref_by_user()
+    {
+        $uid = $this->attributes['ref_by'];
+        return User::where('id', $uid)->first();
     }
 
 }
