@@ -1321,7 +1321,7 @@ class UserController extends BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        if (strlen($pwd) < 8) {
+        if (strlen($pwd) < 5) {
             $res['ret'] = 0;
             $res['msg'] = "密码太短啦";
             return $response->getBody()->write(json_encode($res));
