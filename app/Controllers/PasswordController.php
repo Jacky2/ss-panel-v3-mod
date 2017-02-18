@@ -52,7 +52,7 @@ class PasswordController extends BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        if (strlen($password) < 8) {
+        if (strlen($password) < 5) {
             $res['ret'] = 0;
             $res['msg'] = "密码太短啦";
             return $response->getBody()->write(json_encode($res));
