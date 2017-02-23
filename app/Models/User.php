@@ -175,6 +175,11 @@ class User extends Model
 
     public function isAbleToCheckin()
     {
+        // 限制0级用户签到
+        if(($this->attributes['class']) == 0) {
+            return false;
+        } 
+        
         $last = $this->attributes['last_check_in_time'];
     
         $now = time(); 
