@@ -81,22 +81,8 @@
 											<select id="method" class="form-control">
 												<option value="rc4-md5">RC4-MD5</option>
 												<option value="rc4-md5-6">RC4-MD5-6</option>
-												<option value="aes-128-cfb">AES-128-CFB</option>
-												<option value="aes-192-cfb">AES-192-CFB</option>
 												<option value="aes-256-cfb">AES-256-CFB</option>
-												<option value="aes-128-ctr">AES-128-CTR</option>
-												<option value="aes-192-ctr">AES-192-CTR</option>
 												<option value="aes-256-ctr">AES-256-CTR</option>
-												<option value="camellia-128-cfb">CAMELLIA-128-CFB</option>
-												<option value="camellia-192-cfb">CAMELLIA-192-CFB</option>
-												<option value="camellia-256-cfb">CAMELLIA-256-CFB</option>
-												<option value="bf-cfb">BF-CFB</option>
-												<option value="cast5-cfb">CAST5-CFB</option>
-												<option value="des-cfb">DES-CFB</option>
-												<option value="des-cfb">DES-EDE3-CFB</option>
-												<option value="idea-cfb">IDEA-CFB</option>
-												<option value="rc2-cfb">RC2-CFB</option>
-												<option value="seed-cfb">SEED-CFB</option>
 												<option value="salsa20">SALSA20</option>
 												<option value="chacha20">CHACHA20</option>
 												<option value="chacha20-ietf">CHACHA20-IETF</option>
@@ -176,20 +162,10 @@
 											<label class="floating-label" for="protocol">协议</label>
 											<select id="protocol" class="form-control">
 												<option value="origin">origin</option>
-												<option value="verify_simple">verify_simple</option>
-												<option value="verify_deflate">verify_deflate</option>
-												<option value="verify_sha1">verify_sha1</option>
-												<option value="verify_sha1_compatible">verify_sha1_compatible</option>
-												<option value="auth_sha1">auth_sha1</option>
-												<option value="auth_sha1_compatible">auth_sha1_compatible</option>
-												<option value="auth_sha1_v2">auth_sha1_v2</option>
-												<option value="auth_sha1_v2_compatible">auth_sha1_v2_compatible</option>
 												<option value="auth_sha1_v4">auth_sha1_v4</option>
 												<option value="auth_sha1_v4_compatible">auth_sha1_v4_compatible</option>
 												<option value="auth_aes128_sha1">auth_aes128_sha1</option>
-												<option value="auth_aes128_sha1_compatible">auth_aes128_sha1_compatible</option>
 												<option value="auth_aes128_md5">auth_aes128_md5</option>
-												<option value="auth_aes128_md5_compatible">auth_aes128_md5_compatible</option>
 											</select>
 										</div>
 
@@ -206,8 +182,6 @@
 												<option value="http_simple_compatible">http_simple_compatible</option>
 												<option value="http_post">http_post</option>
 												<option value="http_post_compatible">http_post_compatible</option>
-												<option value="random_head">random_head</option>
-												<option value="random_head_compatible">random_head_compatible</option>
 												<option value="tls1.2_ticket_auth">tls1.2_ticket_auth</option>
 												<option value="tls1.2_ticket_auth_compatible">tls1.2_ticket_auth_compatible</option>
 											</select>
