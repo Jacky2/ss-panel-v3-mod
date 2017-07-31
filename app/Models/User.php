@@ -238,6 +238,20 @@ class User extends Model
         return count($unique_ip_list);
     }
 
+    public function online_ip_array()
+    {
+        $uid = $this->attributes['id'];
+        $total = Ip::where("datetime", ">=", time()-86400)->where('userid', $uid)->orderBy('userid', 'desc')->get();
+        $unique_ip_list = array();
+        foreach ($total as $single_record) {
+            if (!in_array($single_record->ip, $unique_ip_list)) {
+                array_push($unique_ip_list, $single_record->ip);
+            }
+        }
+
+        return $unique_ip_list;
+    }
+
     public function kill_user()
     {
         $uid = $this->attributes['id'];
@@ -324,7 +338,7 @@ class User extends Model
                               $this->attributes['passwd'], $this->attributes['port'],
                               $this->attributes['method'],
                               $this->attributes['protocol'], $this->attributes['obfs'],
-                              $this->online_ip_count(), $this->lastSsTime(),
+                              $this->online_ip_array(), $this->lastSsTime(),
                               $used_traffic, $enable_traffic,
                               $this->lastCheckInTime(), $today_traffic,
                               $is_enable, $this->attributes['reg_date'],

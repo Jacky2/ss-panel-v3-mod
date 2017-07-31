@@ -300,7 +300,7 @@ class AuthController extends BaseController
         }
 
         // check pwd length
-        if (strlen($passwd)<8) {
+        if (strlen($passwd)<5) {
             $res['ret'] = 0;
             $res['msg'] = "密码太短";
             return $response->getBody()->write(json_encode($res));
