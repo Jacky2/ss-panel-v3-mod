@@ -9,8 +9,9 @@ namespace App\Services;
 use App\Services\Mail\Mailgun;
 use App\Services\Mail\Ses;
 use App\Services\Mail\Smtp;
+use App\Services\Mail\SendGrid;
+use App\Services\Mail\NullMail;
 use Smarty;
-
 
 class Mail
 {
@@ -27,8 +28,10 @@ class Mail
                 return new Ses();
             case "smtp":
                 return new Smtp();
+            case "sendgrid":
+                return new SendGrid();
             default:
-                // @TODO default action
+                return new NullMail();
         }
         return null;
     }

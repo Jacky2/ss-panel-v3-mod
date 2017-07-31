@@ -19,10 +19,11 @@ class Slim
 {
     public $app;
 
-    public function newApp(){
+    public function newApp()
+    {
         // config
         $debug = false;
-        if (defined("DEBUG")){
+        if (defined("DEBUG")) {
             $debug = true;
         }
 
@@ -30,14 +31,16 @@ class Slim
         $app = new App([
             'settings' => [
                 'debug'         => $debug,
-                'whoops.editor' => 'sublime'
+                'whoops.editor' => 'sublime',
+                'displayErrorDetails' => $debug
             ]
         ]);
         $app->add(new WhoopsMiddleware);
         $this->app = $app;
     }
 
-    public function run(){
+    public function run()
+    {
         $this->app->run();
     }
 }

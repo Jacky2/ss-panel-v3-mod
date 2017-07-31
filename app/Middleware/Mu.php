@@ -21,36 +21,31 @@ class Mu
             $response->getBody()->write(json_encode($res));
             return $response;
         }
-		
-		$auth=false;
-		$keyset=explode(",",Config::get('muKey'));
-		foreach($keyset as $sinkey)
-		{
-			if($key==$sinkey)
-			{
-				$auth=true;
-				break;
-			}
-		}
-		
-		$node = Node::where("node_ip","=",$_SERVER["REMOTE_ADDR"])->first();
-		if($node==null)
-		{
-			$res['ret'] = 0;
-            $res['msg'] = "source is  invalid";
-            $response->getBody()->write(json_encode($res));
-            return $response;
 
-		}
+        $auth=false;
+        $keyset=explode(",", Config::get('muKey'));
+        foreach ($keyset as $sinkey) {
+            if ($key==$sinkey) {
+                $auth=true;
+                break;
+            }
+        }
 
-		
-		
         if ($auth==false) {
             $res['ret'] = 0;
-            $res['msg'] = "token is  invalid";
+            $res['msg'] = "token or source is invalid";
             $response->getBody()->write(json_encode($res));
             return $response;
         }
+
+        $node = Node::where("node_ip", "LIKE", $_SERVER["REMOTE_ADDR"].'%')->first();
+        if ($node==null && $_SERVER["REMOTE_ADDR"] != '127.0.0.1') {
+            $res['ret'] = 0;
+            $res['msg'] = "token or source is invalid";
+            $response->getBody()->write(json_encode($res));
+            return $response;
+        }
+
         $response = $next($request, $response);
         return $response;
     }

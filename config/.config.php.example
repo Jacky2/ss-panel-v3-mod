@@ -7,11 +7,11 @@ $System_Config['key'] = '';
 $System_Config['debug'] =  'false';  //  正式环境请确保为false
 $System_Config['appName'] = '';             //站点名称
 $System_Config['baseUrl'] = 'https://zhaojin97.cn';            // 站点地址
-$System_Config['timeZone'] = 'PRC';        // RPC 天朝时间  UTC 格林时间
+$System_Config['timeZone'] = 'PRC';        // PRC 天朝时间  UTC 格林时间
 $System_Config['pwdMethod'] = 'sha256';       // 密码加密   可选 md5,sha256
 $System_Config['salt'] = '';               // 密码加密用，从旧版升级请留空
 $System_Config['theme']    = 'material';   // 主题
-$System_Config['authDriver'] = 'cookie';   // 登录验证存储方式,推荐使用Redis   可选: cookie,redis
+$System_Config['authDriver'] = 'cookie';   // 登录验证存储方式 可选: cookie,redis
 $System_Config['sessionDriver'] = 'cookie';
 $System_Config['cacheDriver'] = 'cookie';
 $System_Config['tokenDriver'] = 'db';
@@ -21,7 +21,7 @@ $System_Config['tokenDriver'] = 'db';
 // mu key 用于校验ss-go mu的请求,半角逗号分隔
 $System_Config['muKey'] = '';
 // 邮件
-$System_Config['mailDriver'] = 'mailgun';   // mailgun or smtp
+$System_Config['mailDriver'] = 'mailgun';   // mailgun or smtp or sendgrid
 
 // 用户签到设置
 $System_Config['checkinMin'] = '1989';       // 签到最少流量 单位MB
@@ -76,8 +76,6 @@ $System_Config['enable_wecenter']='false';
 $System_Config['enable_radius']='false';
 $System_Config['enable_cloudxns']='false';
 $System_Config['enable_duoshuo']='false';
-$System_Config['enable_rss']='true';
-$System_Config['enable_paymentwall']='false';
 
 
 
@@ -149,15 +147,6 @@ $System_Config['code_payback']='20';
 #注册时的流量重置日以及需要重置的流量,0不重置
 $System_Config['reg_auto_reset_day']='0';
 $System_Config['reg_auto_reset_bandwidth']='100';
-
-
-
-#PaymentWall
-$System_Config['pmw_publickey']='';
-$System_Config['pmw_privatekey']='';
-$System_Config['pmw_widget']='m2_1';
-$System_Config['pmw_height']='350px';
-
 
 #Cloudxns
 $System_Config['cloudxns_apikey']='';#自己去 cloudxns.net 申请
@@ -263,15 +252,9 @@ $System_Config['enable_auto_clean_unused_days']='30';
 
 #是否夹带统计代码，自己在 resources/views/{主题名} 下创建一个 analytics.tpl ，如果有必要就用 literal 界定符
 $System_Config['enable_analytics_code']='false';
-$System_Config['enable_alipay']='true';
 
 #是否启用捐赠相关功能
 $System_Config['enable_donate']='true';
-
-
-
-
-
 
 #telegram bot,是否启用
 $System_Config['enable_telegram']='false';
@@ -287,3 +270,49 @@ $System_Config['mu_suffix']='baidu.com';
 
 #多用户混淆参数表达式，%5m代表取用户特征 md5 的前五位，%id 代表用户id,%suffix 代表上面这个后缀。
 $System_Config['mu_regex']='%5m%id.%suffix';
+
+
+#图灵机器人
+$System_Config['enable_tuling']='false';
+$System_Config['tuling_apikey']='';
+$System_Config['tuling_apisecert']='';
+
+#Telegram 机器人账号
+$System_Config['telegram_bot']='_bot';
+
+#Telegram 机器人在群组中不回应
+$System_Config['telegram_group_quiet']='false';
+
+#二维码解码方式，online，phpzbar，zxing_online，zxing_local
+$System_Config['telegram_qrcode']='zxing_local';
+
+#Telegram 机器人请求Key，随意设置，由大小写英文和数字组成，复杂一些，用于校验请求，更新这个参数之后请 php xcat setTelegram
+$System_Config['telegram_request_token']='sjhueAMAndnenw2k2k1mmsJSJWMWiwiwthgfhgfh';
+
+# sendgrid
+$System_Config['sendgrid_key'] = '';
+$System_Config['sendgrid_sender'] = '';
+
+
+#支付系统
+
+#取值 paymentwall,zfbjk,spay,none
+$System_Config['payment_system']='none';
+
+#PaymentWall
+$System_Config['pmw_publickey']='';
+$System_Config['pmw_privatekey']='';
+$System_Config['pmw_widget']='m2_1';
+$System_Config['pmw_height']='350px';
+
+#alipay,spay
+$System_Config['alipay_id']='';
+$System_Config['alipay_key']='';
+
+#alipay,zfbjk.com
+$System_Config['zfbjk_pid']='';
+$System_Config['zfbjk_key']='';
+$System_Config['zfbjk_qrcodeurl']='https://www.zhaojin97.cn/wp-content/uploads/2016/01/630c50ab52bc139b2a33af8cc64e47ad2016010111570425541.jpg';
+
+#不安全中转模式，这个开启之后使用除了 auth_aes128_md5 或者 auth_aes128_sha1 以外的协议地用户也可以设置和使用中转，但是，强烈推荐不开启。
+$System_Config['relay_insecure_mode']='false';

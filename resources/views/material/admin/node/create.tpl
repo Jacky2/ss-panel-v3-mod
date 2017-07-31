@@ -24,50 +24,56 @@
 										<label class="floating-label" for="name">节点名称</label>
 										<input class="form-control" id="name" type="text" name="name">
 									</div>
-									
-									
+
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="server">节点地址</label>
 										<input class="form-control" id="server" type="text" name="server">
 									</div>
-									
+
+									<div class="form-group form-group-label">
+										<label class="floating-label" for="server">节点IP(不填则自动获取，填写请按照 <a href="https://github.com/esdeathlove/ss-panel-v3-mod/wiki/%E8%8A%82%E7%82%B9IP%E5%A1%AB%E5%86%99%E8%A7%84%E5%88%99">这里</a> 的规则进行填写)</label>
+										<input class="form-control" id="node_ip" name="node_ip" type="text">
+									</div>
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="method">加密方式</label>
 										<input class="form-control" id="method" type="text" name="method">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="rate">流量比例</label>
 										<input class="form-control" id="rate" type="text" name="rate">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<div class="checkbox switch">
 											<label for="custom_method">
-												<input  class="access-hide" id="custom_method" type="checkbox" name="custom_method"><span class="switch-toggle"></span>自定义加密
+												<input  class="access-hide" id="custom_method" type="checkbox" name="custom_method" checked="checked" disabled><span class="switch-toggle"></span>自定义加密
 											</label>
 										</div>
 									</div>
-									
-									{if $config['enable_rss']=='true'}
+
 									<div class="form-group form-group-label">
 										<div class="checkbox switch">
 											<label for="custom_rss">
-												<input  class="access-hide" id="custom_rss" type="checkbox" name="custom_rss"><span class="switch-toggle"></span>自定义协议&混淆
+												<input  class="access-hide" id="custom_rss" type="checkbox" name="custom_rss" checked="checked" disabled><span class="switch-toggle"></span>自定义协议&混淆
 											</label>
 										</div>
 									</div>
-									
+
 									<div class="form-group form-group-label">
-										<div class="checkbox switch">
-											<label for="mu_only">
-												<input  class="access-hide" id="mu_only" type="checkbox" name="mu_only"><span class="switch-toggle"></span>只启用单端口多用户
-											</label>
-										</div>
+										<label for="mu_only">
+											<label class="floating-label" for="sort">单端口多用户启用</label>
+											<select id="mu_only" class="form-control" name="is_multi_user">
+												<option value="0">单端口多用户与普通端口并存</option>
+												<option value="-1">只启用普通端口</option>
+												<option value="1">只启用单端口多用户</option>
+											</select>
+										</label>
 									</div>
-									{/if}
-									
-									
+
+
 								</div>
 							</div>
 						</div>
@@ -82,13 +88,13 @@
 											</label>
 										</div>
 									</div>
-									
-									
+
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="status">节点状态</label>
 										<input class="form-control" id="status" type="text" name="status">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<div class="form-group form-group-label">
 												<label class="floating-label" for="sort">节点类型</label>
@@ -107,48 +113,48 @@
 												</select>
 											</div>
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="info">节点描述</label>
 										<input class="form-control" id="info" type="text" name="info">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="class">节点等级（不分级请填0，分级为数字）</label>
 										<input class="form-control" id="class" type="text" value="0" name="class">
 									</div>
-									
-									
+
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="group">节点群组（分组为数字，不分组请填0）</label>
 										<input class="form-control" id="group" type="text" value="0" name="group">
 									</div>
-									
-									
+
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="node_bandwidth_limit">节点流量上限（不使用的话请填0）（GB）</label>
 										<input class="form-control" id="node_bandwidth_limit" type="text" value="0" name="node_bandwidth_limit">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="bandwidthlimit_resetday">节点流量上限清空日</label>
 										<input class="form-control" id="bandwidthlimit_resetday" type="text" value="0" name="bandwidthlimit_resetday">
 									</div>
-									
+
 									<div class="form-group form-group-label">
 										<label class="floating-label" for="node_speedlimit">节点限速(对于每个用户端口)（Mbps）</label>
 										<input class="form-control" id="node_speedlimit" type="text" value="0" name="node_speedlimit">
 									</div>
 								</div>
 							</div>
-						</div>	
-						
-						
-						
+						</div>
+
+
+
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									
+
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-10 col-md-push-1">
@@ -162,21 +168,21 @@
 
 					</form>
 					{include file='dialog.tpl'}
-					
-					
-					
-	
+
+
+
+
 			</div>
-			
-			
-			
+
+
+
 		</div>
 	</main>
 
-	
-	
-	
-	
+
+
+
+
 
 
 
@@ -213,7 +219,7 @@
 			{
 				var custom_method=0;
 			}
-			
+
 			if(document.getElementById('type').checked)
 			{
 				var type=1;
@@ -223,7 +229,6 @@
 				var type=0;
 			}
 			{/literal}
-			{if $config['enable_rss']=='true'}
 			if(document.getElementById('custom_rss').checked)
 			{
 				var custom_rss=1;
@@ -232,18 +237,8 @@
 			{
 				var custom_rss=0;
 			}
-			
-			if(document.getElementById('mu_only').checked)
-			{
-				var mu_only=1;
-			}
-			else
-			{
-				var mu_only=0;
-			}
-			{/if}
-			
-			
+
+
             $.ajax({
                 type: "POST",
                 url: "/admin/node",
@@ -251,23 +246,21 @@
                 data: {
                     name: $("#name").val(),
                     server: $("#server").val(),
+										node_ip: $("#node_ip").val(),
                     method: $("#method").val(),
                     custom_method: custom_method,
                     rate: $("#rate").val(),
                     info: $("#info").val(),
                     type: type,
-					group: $("#group").val(),
+										group: $("#group").val(),
                     status: $("#status").val(),
-					node_speedlimit: $("#node_speedlimit").val(),
+										node_speedlimit: $("#node_speedlimit").val(),
                     sort: $("#sort").val(),
-					class: $("#class").val(),
-					node_bandwidth_limit: $("#node_bandwidth_limit").val(),
-					bandwidthlimit_resetday: $("#bandwidthlimit_resetday").val(){if $config['enable_rss']=='true'},
-					custom_rss: custom_rss,
-					mu_only: mu_only{else},
-					custom_rss: 0,
-					mu_only: 0
-					{/if}
+										class: $("#class").val(),
+										node_bandwidth_limit: $("#node_bandwidth_limit").val(),
+										bandwidthlimit_resetday: $("#bandwidthlimit_resetday").val(),
+										custom_rss: custom_rss,
+										mu_only: $("#mu_only").val()
                 },
                 success: function (data) {
                     if (data.ret) {
@@ -288,5 +281,3 @@
 	});
 
 </script>
-
-

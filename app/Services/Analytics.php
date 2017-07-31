@@ -17,8 +17,8 @@ class Analytics
     {
         return User::where('last_check_in_time', '>', 0)->count();
     }
-	
-	public function getTodayCheckinUser()
+    
+    public function getTodayCheckinUser()
     {
         return User::where('last_check_in_time', '>', strtotime('today'))->count();
     }
@@ -28,53 +28,53 @@ class Analytics
         $total = User::sum('u') + User::sum('d');
         return Tools::flowAutoShow($total);
     }
-	
-	public function getTodayTrafficUsage()
+    
+    public function getTodayTrafficUsage()
     {
         $total = User::sum('u') + User::sum('d') - User::sum('last_day_t');
         return Tools::flowAutoShow($total);
     }
-	
-	
-	public function getRawTodayTrafficUsage()
+    
+    
+    public function getRawTodayTrafficUsage()
     {
         $total = User::sum('u') + User::sum('d') - User::sum('last_day_t');
         return $total;
     }
-	
-	public function getLastTrafficUsage()
+    
+    public function getLastTrafficUsage()
     {
         $total = User::sum('last_day_t');
         return Tools::flowAutoShow($total);
     }
-	
-	
-	public function getRawLastTrafficUsage()
+    
+    
+    public function getRawLastTrafficUsage()
     {
         $total = User::sum('last_day_t');
         return $total;
     }
-	
-	public function getUnusedTrafficUsage()
+    
+    public function getUnusedTrafficUsage()
     {
         $total = User::sum('transfer_enable') - User::sum('u') - User::sum('d');
         return Tools::flowAutoShow($total);
     }
-	
-	public function getRawUnusedTrafficUsage()
+    
+    public function getRawUnusedTrafficUsage()
     {
         $total = User::sum('transfer_enable') - User::sum('u') - User::sum('d');
         return $total;
     }
-	
-	
-	public function getTotalTraffic()
+    
+    
+    public function getTotalTraffic()
     {
         $total = User::sum('transfer_enable');
         return Tools::flowAutoShow($total);
     }
-	
-	public function getRawTotalTraffic()
+    
+    public function getRawTotalTraffic()
     {
         $total = User::sum('transfer_enable');
         return $total;
@@ -85,8 +85,8 @@ class Analytics
         $time = time() - $time;
         return User::where('t', '>', $time)->count();
     }
-	
-	public function getUnusedUser()
+    
+    public function getUnusedUser()
     {
         return User::where('t', '=', 0)->count();
     }
@@ -95,15 +95,24 @@ class Analytics
     {
         return Node::count();
     }
-	
-	public function getTotalSSNode()
+    
+    public function getTotalSSNode()
     {
-        return Node::where('node_heartbeat','>',0)->where('sort','=',0)->count();
+        return Node::where('node_heartbeat', '>', 0)->where(
+                    function ($query) {
+                        $query->Where('sort', '=', 0)
+                            ->orWhere('sort', '=', 10);
+                    }
+                )->count();
     }
-	
-	public function getAliveSSNode()
+    
+    public function getAliveSSNode()
     {
-        return Node::where('sort','=',0)->where('node_heartbeat','>',time()-90)->count();
+        return Node::where(
+            function ($query) {
+                $query->Where('sort', '=', 0)
+                    ->orWhere('sort', '=', 10);
+            }
+        )->where('node_heartbeat', '>', time()-90)->count();
     }
-
 }
