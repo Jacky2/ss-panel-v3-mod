@@ -247,6 +247,7 @@ $app->group('/admin', function () {
     $this->post('/auto/ajax', 'App\Controllers\Admin\AutoController:ajax');
 
     // IP Mange
+    $this->get('/alive', 'App\Controllers\Admin\IpController:index');
     $this->get('/block', 'App\Controllers\Admin\IpController:block');
     $this->get('/unblock', 'App\Controllers\Admin\IpController:unblock');
     $this->post('/unblock', 'App\Controllers\Admin\IpController:doUnblock');
