@@ -8,6 +8,7 @@ use App\Models\BlockIp;
 use App\Models\UnblockIp;
 use App\Controllers\AdminController;
 use App\Utils\QQWry;
+use App\Utils\Tools;
 use App\Services\Auth;
 
 use Ozdemir\Datatables\Datatables;
@@ -15,31 +16,6 @@ use App\Utils\DatatablesHelper;
 
 class IpController extends AdminController
 {
-
-    public function aliveindex($request, $response, $args){
-        $pageNum = 1;
-        if (isset($request->getQueryParams()["page"])) {
-            $pageNum = $request->getQueryParams()["page"];
-        }
-        
-        $logs = Ip::orderBy('id', 'desc')->where("datetime",">",time()-120)->paginate(15, ['*'], 'page', $pageNum);
-        $loc=array();
-        
-        $iplocation = new QQWry(); 
-        foreach($logs as $log)
-        {
-            if(!isset($loc[$log->ip()]))
-            {
-                $location=$iplocation->getlocation($log->ip());
-                $loc[$log->ip()]=iconv('gbk', 'utf-8//IGNORE', $location['country'].$location['area']);
-            }
-        }
-        
-        
-        $logs->setPath('/admin/alive');
-        return $this->view()->assign("loc",$loc)->assign('logs',$logs)->display('admin/ip/alive.tpl');
-    }
-
     public function index($request, $response, $args)
     {
         $table_config['total_column'] = array("id" => "ID", "userid" => "用户ID",
@@ -156,6 +132,49 @@ class IpController extends AdminController
 
         $datatables->edit('type', function ($data) {
             return $data['type'] == 0 ? '成功' : '失败';
+        });
+
+        $body = $response->getBody();
+        $body->write($datatables->generate());
+    }
+
+    public function trafficLog($request, $response, $args)
+    {
+        $table_config['total_column'] = array("id" => "ID", "user_id" => "用户ID",
+                          "user_name" => "用户名", "node_name" => "使用节点",
+                          "rate" => "倍率", "origin_traffic" => "实际使用流量",
+                          "traffic" => "结算流量",
+                          "log_time" => "记录时间", 
+                          "ip" => "IP", "location" => "归属地");
+        $table_config['default_show_column'] = array("id", "user_id",
+                                  "user_name", "node_name",
+                                  "rate", "origin_traffic",
+                                  "traffic", "log_time",
+                                  "ip", "location");
+        $table_config['ajax_url'] = 'trafficlog/ajax';
+        return $this->view()->assign('table_config', $table_config)->display('admin/trafficlog.tpl');
+    }
+
+    public function ajax_trafficLog($request, $response, $args)
+    {
+        $datatables = new Datatables(new DatatablesHelper());
+        $datatables->query('Select log.id,log.user_id,user.user_name,node.name as node_name,log.rate,(log.u + log.d) as origin_traffic,log.traffic,log.log_time,alive_ip.ip,alive_ip.ip as location 
+            from user_traffic_log as log,user,ss_node as node,alive_ip 
+            WHERE log.user_id = user.id AND log.node_id = node.id AND log.log_time=alive_ip.datetime');
+
+        $datatables->edit('log_time', function ($data) {
+            return date('Y-m-d H:i:s', $data['log_time']);
+        });
+
+        $datatables->edit('origin_traffic', function ($data) {
+            return Tools::flowAutoShow($data['origin_traffic']);
+        });
+
+        $datatables->edit('location', function ($data) {
+            $iplocation = new QQWry();
+            $data=str_replace("::ffff:","", $data);
+            $location=$iplocation->getlocation($data['location']);
+            return iconv('gbk', 'utf-8//IGNORE', $location['country'].$location['area']);
         });
 
         $body = $response->getBody();

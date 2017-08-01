@@ -244,8 +244,13 @@ class User extends Model
         $total = Ip::where("datetime", ">=", time()-86400)->where('userid', $uid)->orderBy('userid', 'desc')->get();
         $unique_ip_list = array();
         foreach ($total as $single_record) {
-            if (!in_array($single_record->ip, $unique_ip_list)) {
-                array_push($unique_ip_list, $single_record->ip);
+            $data=$single_record->ip;
+            $data=str_replace("::ffff:","", $data);
+            $iplocation = new QQWry();
+            $location=$iplocation->getlocation($data);
+            $data.=" ".iconv('gbk', 'utf-8//IGNORE', $location['country'].$location['area']);
+            if (!in_array($data, $unique_ip_list)) {
+                array_push($unique_ip_list, $data);
             }
         }
 

@@ -178,8 +178,8 @@ $app->group('/password', function () {
 $app->group('/admin', function () {
     $this->get('', 'App\Controllers\AdminController:index');
     $this->get('/', 'App\Controllers\AdminController:index');
-    $this->get('/trafficlog', 'App\Controllers\AdminController:trafficLog');
-    $this->post('/trafficlog/ajax', 'App\Controllers\AdminController:ajax_trafficLog');
+    $this->get('/trafficlog', 'App\Controllers\Admin\IpController:trafficLog');
+    $this->post('/trafficlog/ajax', 'App\Controllers\Admin\IpController:ajax_trafficLog');
     // Node Mange
     $this->get('/node', 'App\Controllers\Admin\NodeController:index');
 
@@ -247,7 +247,6 @@ $app->group('/admin', function () {
     $this->post('/auto/ajax', 'App\Controllers\Admin\AutoController:ajax');
 
     // IP Mange
-    $this->get('/alive', 'App\Controllers\Admin\IpController:index');
     $this->get('/block', 'App\Controllers\Admin\IpController:block');
     $this->get('/unblock', 'App\Controllers\Admin\IpController:unblock');
     $this->post('/unblock', 'App\Controllers\Admin\IpController:doUnblock');
