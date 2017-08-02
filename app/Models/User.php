@@ -243,10 +243,11 @@ class User extends Model
         $uid = $this->attributes['id'];
         $total = Ip::where("datetime", ">=", time()-86400)->where('userid', $uid)->orderBy('userid', 'desc')->get();
         $unique_ip_list = array();
+        $iplocation = new QQWry();
         foreach ($total as $single_record) {
             $data=$single_record->ip;
             $data=str_replace("::ffff:","", $data);
-            $iplocation = new QQWry();
+            //$iplocation = new QQWry();
             $location=$iplocation->getlocation($data);
             $data.=" ".iconv('gbk', 'utf-8//IGNORE', $location['country'].$location['area']);
             if (!in_array($data, $unique_ip_list)) {
