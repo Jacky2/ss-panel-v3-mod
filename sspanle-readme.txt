@@ -123,11 +123,11 @@ vi .config.php
 修改以下几处，其他配置根据自己情况来调整
 
 # 随便填
-$System_Config['key'] = '127-ssr';
+$System_Config['key'] = 'ssr';
 # 随便填
-$System_Config['appName'] = '127-ssr';
+$System_Config['appName'] = 'ssr';
 # 填你的服务器域名或者IP
-$System_Config['baseUrl'] = 'http://104.129.171.127';
+$System_Config['baseUrl'] = 'http://IP or 域名';
 # 随便填
 $System_Config['salt'] = '127-ssr';
 $System_Config['authDriver'] = 'redis';
@@ -140,27 +140,16 @@ $System_Config['db_driver'] = 'mysql';
 $System_Config['db_host'] = '127.0.0.1';
 $System_Config['db_database'] = 'ssr';
 $System_Config['db_username'] = 'ssr';
-$System_Config['db_password'] = 'ssr@127server';
+$System_Config['db_password'] = 'password';
 
 # redis配置
 $System_Config['redis_scheme'] = 'tcp';
 $System_Config['redis_host'] = '127.0.0.1';
 $System_Config['redis_port'] = '6379';
 $System_Config['redis_database'] = '0';
-$System_Config['redis_password']="redis@127server";
+$System_Config['redis_password']="password";
 
 
-修改如下几处
-key = 'sdfsfsfsfsfsfd'
-appName = 'ss'             //站点名称
-baseUrl = 'https://www.ahbb.ml'            // 站点地址
-pwdMethod = 'sha256'       // 密码加密   可选 md5,sha256
-salt = 'dsffsfsfsfsfsf'               // 密码加密用，从旧版升级请留空
-session = 'redis'
-cache   = 'redis' 
-_database = 'ss'
-db_username = 'ss'
-db_password = '123456'
 
 
 安装倚赖库
