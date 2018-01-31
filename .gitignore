@@ -3,5 +3,5 @@ vendor/
 composer.phar
 .user.ini
 public/.user.ini
-storage/*
+#storage/*
 config/.config.php
